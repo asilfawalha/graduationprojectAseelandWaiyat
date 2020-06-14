@@ -1,0 +1,59 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adminlayout.css') }}">
+  </head>
+  {% block body %}
+  <body>
+    <nav>
+      <a href="/success">user</a>
+      <a href="/yearly">monthly stat</a>
+      <a href="/peryear"> yearly stat</a>
+      <a href="/addexistingitem">add existing item </a>
+      <a href="/pickup">pick up </a>
+      <a href="/addnew"> add new item</a>
+      <a href="/recieptforrequest">receipt</a>
+      <a href="/logout">logout</a>
+    </nav>
+    <br>
+    <div class="title">
+      <h1>remove registration</h1>
+    </div>
+    <center>
+    {{ wtf.quick_form(form) }}
+    </center>
+    <hr>
+
+    <table border='1'>
+      <tr>
+        <th>username</th>
+        <th>password</th>
+        <th>role</th>
+      </tr>
+        {% for itemin in inlist: %}
+
+          <tr>
+            <td>{{itemin[0]}}</td>
+            <td>{{itemin[1]}}</td>
+            <td>{{itemin[2]}}</td>
+          </tr>
+
+        {%endfor%}
+</table>
+
+
+        <div class="message"><!-- Displays flash message if it is true-->
+        {% with message = get_flashed_messages() %}
+            {% if message %}
+                <h2>{{ message }}</h2>
+            {% endif %}
+        {%endwith%}
+      </div>
+
+  </body>
+  {% endblock %}
+</html>

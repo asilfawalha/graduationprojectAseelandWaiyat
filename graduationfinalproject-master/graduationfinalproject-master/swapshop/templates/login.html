@@ -1,0 +1,59 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      div{
+        margin:0px;
+      }
+        body{
+          margin-top: 0px;
+          margin-bottom: 0px;
+          margin-left: 0px;
+          margin-right: 0px;
+          padding-bottom: 0px;
+        }
+        nav{
+          padding:10px;
+          background-color:blue;
+        }
+        nav a{
+          padding-left:15px;
+          color:white;
+          text-decoration: none;
+        }
+        a:hover{
+          background-color:gray;
+        }
+        form h2{
+          font-size:30px;
+        }
+        form{
+
+          text-align:center;
+          margin:20px;
+          padding:20px;
+          border: 1px black solid;
+          background-image: radial-gradient(lightblue, yellow);
+        }
+    </style>
+  </head>
+  {% block body %}
+  <body>
+    <nav>
+      <a href="/">home</a>
+      <a href="/item">item</a>
+      <a href="/login">admin</a>
+    </nav>
+
+      <h2>sign in</h2>
+      {{ wtf.quick_form(forml) }}
+      <center>
+      <img src="{{ url_for('static', filename='img/scsulogo.jpg') }}" alt="">
+    </center>
+  </body>
+  {% endblock %}
+</html>

@@ -1,0 +1,51 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/adminlayout.css') }}">
+
+  </head>
+  {% block body %}
+  <body>
+    <nav>
+      <a href="/success">user</a>
+      <a href="/yearly">monthly stat</a>
+      <a href="/peryear"> yearly stat</a>
+      <a href="/addexistingitem">add existing item </a>
+      <a href="/pickup">pick up </a>
+      <a href="/addnew"> add new item</a>
+      <a href="/recieptforrequest">receipt</a>
+      <a href="/logout">logout</a>
+    </nav>
+    <br>
+    <div class="title">
+      <h1>reciept</h1>
+    </div>
+
+    <hr>
+
+<div class="row">
+  {% for itemin in inlist: %}
+  <div class="column">
+    <div class="card">
+      <h1>reciept</h1>
+      <h3>dept: {{itemin[6]}}</h3>
+      <h3>faculty: {{itemin[9]}}</h3>
+      <h3>request date: {{itemin[10]}}/{{itemin[11]}}/{{itemin[12]}}</h3>
+      <p>{{itemin[0]}}:{{itemin[1]}}</p>
+      <p>{{itemin[2]}}:{{itemin[3]}}</p>
+      <p>{{itemin[4]}}:{{itemin[5]}}</p>
+      <h4>dept phon ext:{{itemin[7]}} </h4>
+      <h4>scsu email: {{itemin[8]}}</h4>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+
+  </body>
+  {% endblock %}
+</html>

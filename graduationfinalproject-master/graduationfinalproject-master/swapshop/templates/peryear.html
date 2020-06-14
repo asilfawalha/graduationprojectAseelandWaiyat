@@ -1,0 +1,121 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/adminlayout.css') }}">
+  </head>
+  {% block body %}
+  <body>
+    <nav>
+      <a href="/success">user</a>
+      <a href="/yearly">monthly stat</a>
+      <a href="/peryear"> yearly stat</a>
+      <a href="/addexistingitem">add existing item </a>
+      <a href="/pickup">pick up </a>
+      <a href="/addnew"> add new item</a>
+      <a href="/recieptforrequest">receipt</a>
+      <a href="/logout">logout</a>
+    </nav>
+    <br>
+<center>
+    {{ wtf.quick_form(formae) }}
+
+    <h1>Pie chart of  category and total pickup</h1>
+
+    <div id="piechart1"></div>
+    <h3>The history of the Total Pick Up for everything : {{ allpickup }} items</h3>
+    <h3>Total weight safe from landfield :{{ allweight }} pound</h3>
+
+<hr>
+<h1> Bar chart for (pick up item $) for each category</h1>
+<div id="mybarchart"></div>
+<h3>The saving money for SCSU so far is $ {{ allsale }}</h3>
+</center>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ....................................all the script after this line..............................-->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/googlechart.js') }}"></script>
+
+    <!-- ........................ the javascript for the pie chart ............................. -->
+    <script type="text/javascript">
+    // Load google charts
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Draw the chart and set the chart values
+    function drawChart() {
+      var data1 = google.visualization.arrayToDataTable([
+      ['category', 'total pickup'],
+      ['binder', {{ binder }} ],
+      ['Envelope', {{ env }} ],
+      ['Divider Tab label', {{ dtl }} ],
+      ['file & folders', {{ file }} ],
+      ['paper', {{ paper }} ],
+      ['Organizational Supplies', {{ ogs }} ],
+      ['General office', {{ gof }} ],
+      ['Electronics',{{ elt }} ]
+    ]);
+
+      // Optional; add a title and set the width and height of the chart
+      var options1 = {'title':'y=category x=total item pick up', 'width':850, 'height':700};
+
+      // Display the chart inside the <div> element with id="piechart"
+      var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
+      chart1.draw(data1, options1);
+
+
+
+      var data2 = google.visualization.arrayToDataTable([
+           ['category', 'sales $', { role: 'style' }],
+           ['binder', {{ bbinder }}, 'red'],
+           ['envelope', {{ benv }}, 'silver'],
+           ['divider, tab, label', {{ bdtl }}, 'gold'],
+           ['file and folder', {{ bfile }}, 'green' ],
+           ['paper', {{ bpaper }}, 'blue' ],
+           ['organizational supplies', {{ bogs }}, 'pink' ],
+           ['general office', {{ bgof }}, 'purple' ],
+           ['electronic', {{ belt }} , 'yellow' ],
+        ]);
+
+      var view2 = new google.visualization.DataView(data2);
+      view2.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+      var options2 = {
+                title: "sales for each category",
+                width: 800,
+                height: 600,
+                bar: {groupWidth: "95%"},
+                legend: { position: "none" },
+            };
+      var chart2 = new google.visualization.BarChart(document.getElementById("mybarchart"));
+      chart2.draw(view2, options2);
+    }
+
+    </script>
+<!-- ..........................the javascript for the pie chart ................................ -->
+
+
+
+
+    </html>
+
+  </body>
+  {% endblock %}
+</html>

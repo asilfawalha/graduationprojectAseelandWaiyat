@@ -1,0 +1,71 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/adminlayout.css') }}">
+
+  </head>
+  {% block body %}
+  <body>
+    <nav>
+      <a href="/">home</a>
+      <a href="/item">item</a>
+      <a href="/login">admin</a>
+    </nav>
+    <br>
+    <div class="title">
+      <h1>inventory</h1>
+    </div>
+    <center>
+    {{ wtf.quick_form(formc) }}
+  </center>
+    <hr>
+
+    <div class="row">
+        {% for itemin in inlist: %}
+
+        <div class="column">
+            <div class="card">
+            <h3>{{itemin[0]}}</h3>
+            <h4>item : {{itemin[1]}}</h4>
+            <p>quantity:{{itemin[2]}}</p>
+            <p>price/item:$ {{itemin[3]}}</p>
+
+          </div>
+        </div>
+        {%endfor%}
+
+    </div>
+
+    <hr>
+    <br>
+    <center>
+      <h1>request item</h1>
+    </center>
+    <div class="column">
+        <div class="card">
+          <h1>request item form online</h1>
+
+          <a href="/item1">request one item</a>
+          <br>
+          <br>
+          <a href="/item2">request two items</a>
+          <br>
+          <br>
+          <a href="/item3">request three items</a>
+      </div>
+    </div>
+<div class="column">
+  <div class="card">
+    <h1>or you can order via phone call</h1>
+    <p>phone number: 203-392-6931</p>
+    <p>monday-friday (9am-5pm)</p>
+  </div>
+</div>
+  </body>
+  {% endblock %}
+</html>

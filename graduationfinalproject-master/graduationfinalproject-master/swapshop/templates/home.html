@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>swap-shop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  </head>
+
+{% block body %}
+  <body>
+    <nav>
+      <a href="/">home</a>
+      <a href="/item">item</a>
+      <a href="/login">admin</a>
+    </nav>
+
+    <div class="imgt">
+      <!--
+      <img src="https://inside.southernct.edu/sites/default/files/sustainablesouthernlogo.jpg" alt="fo">
+    -->
+    <img src="{{ url_for('static', filename='img/swapshop.JPG') }}" alt="">
+    </div>
+
+    <div class="content">
+      <h1>Swap Shop</h1>
+      <p>The Swap shop from the office sustainability is Mrs Heather Stearns project.<br>
+      Our  main  aim for this project to allowed all Southern department to register the items<br>
+      that they do not want and donate them to office sustainability. <br>
+      The faculty from all department can also register for the donated item that they want.<br>
+      In order to safe their budget. With these we can make the faculty the other department happy<br>
+      and reduce the waste in the land-field.</p>
+    </div>
+    <center>
+<!--
+      <img src="https://thesouthernnews.files.wordpress.com/2014/12/scsugogreen.jpg" alt="">
+-->
+<img src="{{ url_for('static', filename='img/heather.JPG') }}" alt="">
+
+
+    </center>
+    <footer>
+      <h3>swap shop office sustainability</h3>
+      <p>phone number: 203-392-6931</p>
+    </footer>
+  </body>
+  {% endblock %}
+</html>
